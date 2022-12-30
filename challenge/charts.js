@@ -89,14 +89,14 @@ function buildCharts(sample) {
     var barData = [{
       type: 'bar',
       x: sampleValues,
-      y: yticks,
+      y: otuIDs,
     }];
 
     // Deliverable 1: 9. Create the layout for the bar chart. 
     var barLayout = {
-      title: 'Top 10 Belly Button Bacteria',
-      xaxis: {title: 'Bacteria Amount'},
-      yaxis: {title: 'Bacteria ID', ticks: yticks}
+      title: 'Top 10 Belly Button Bacteria Testing',
+      xaxis: {title: 'Bacteria ID', ticks: yticks},
+      yaxis: {title: 'Bacteria Amount'}
     };
 
     // Deliverable 1: 10. Use Plotly to plot the data with the layout. 
