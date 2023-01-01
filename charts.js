@@ -78,20 +78,15 @@ function buildCharts(sample) {
     var otuLabels = selectedSample.otu_labels;
     var sampleValues = selectedSample.sample_values;
 
-    console.log(otuIDs)
-    console.log(otuLabels)
-    console.log(sampleValues)
     // Deliverable 3: 3. Create a variable that holds the washing frequency.
     var washed = selectedMeta.wfreq;
+    console.log(washed)
 
     // Deliverable 1: 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order 
     // so the otu_ids with the most bacteria are last. 
     var yticks = otuIDs.slice(0, 10).map(x => 'OTU ' + String(x));
     var htext = otuLabels.slice(0,10);
-
-    console.log(yticks)
-    console.log(htext)
 
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = [{
@@ -129,10 +124,27 @@ function buildCharts(sample) {
     // Deliverable 2: 3. Use Plotly to plot the data with the layout.
     Plotly.newPlot('bubble', bubData, bubLayout);
     // Deliverable 3: 4. Create the trace for the gauge chart.
-    
+    var gData = [{
+      value: washed,
+      type: 'indicator',
+      mode: 'gauge+number',
+      title: {text: 'Belly Button Washes Per Week'},
+      gauge: {
+        axis: {range: [null, 10], tickwidth: 1, tickcolor: 'black'},
+        bar: {color: 'black'},
+        borderwidth: 2,
+        steps: [
+          {range: [0,2], color: 'darkgreen'},
+          {range: [2,4], color: 'mediumseagreen'},
+          {range: [4,6], color: 'mediumaquamarine'},
+          {range: [6,8], color: 'darkturquoise'},
+          {range: [8,10], color: 'deepskyblue'}
+        ]
+      }
+    }];
     // Deliverable 3: 5. Create the layout for the gauge chart.
-
+    var gLayout = {width: 600, height: 400};
     // Deliverable 3: 6. Use Plotly to plot the gauge data and layout.
-
+    Plotly.newPlot('gauge', gData, gLayout);
   });
 }
