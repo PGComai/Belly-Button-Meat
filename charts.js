@@ -96,7 +96,7 @@ function buildCharts(sample) {
 
     // Deliverable 1: 9. Create the layout for the bar chart. 
     var barLayout = {
-      title: 'Top 10 Belly Button Bacteria Testing',
+      title: 'Top 10 Belly Button Bacteria',
       xaxis: {title: 'Bacteria ID', ticks: yticks},
       yaxis: {title: 'Bacteria Amount'}
     };
