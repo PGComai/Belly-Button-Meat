@@ -89,7 +89,7 @@ function buildCharts(sample) {
 
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = [{
-      type: 'bar',
+      type: 'hbar',
       x: yticks,
       y: sampleValues,
     }];
