@@ -77,38 +77,57 @@ function buildCharts(sample) {
     var otuIDs = selectedSample.otu_ids;
     var otuLabels = selectedSample.otu_labels;
     var sampleValues = selectedSample.sample_values;
+
+    console.log(otuIDs)
+    console.log(otuLabels)
+    console.log(sampleValues)
     // Deliverable 3: 3. Create a variable that holds the washing frequency.
     var washed = selectedMeta.wfreq;
 
     // Deliverable 1: 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order 
     // so the otu_ids with the most bacteria are last. 
-    var yticks = otuIDs.slice(0, 10).reverse();
+    var yticks = otuIDs.slice(0, 10).map(x => 'OTU ' + String(x));
+    var htext = otuLabels.slice(0,10);
 
     console.log(yticks)
+    console.log(htext)
 
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = [{
-      type: 'hbar',
       x: yticks,
       y: sampleValues,
+      type: 'bar',
+      text: htext
     }];
 
     // Deliverable 1: 9. Create the layout for the bar chart. 
     var barLayout = {
       title: 'Top 10 Belly Button Bacteria',
-      xaxis: {title: 'Bacteria ID', ticks: yticks},
+      xaxis: {title: 'Bacteria ID', ticks: yticks, },
       yaxis: {title: 'Bacteria Amount'}
     };
 
     // Deliverable 1: 10. Use Plotly to plot the data with the layout. 
     Plotly.newPlot("bar", barData, barLayout);
     // Deliverable 2: 1. Create the trace for the bubble chart.
-
+    var bubData = [{
+      x: otuIDs,
+      y: sampleValues,
+      text: otuLabels,
+      mode: 'markers',
+      marker: {
+        size: sampleValues,
+        color: otuIDs
+      }
+    }];
     // Deliverable 2: 2. Create the layout for the bubble chart.
-
+    var bubLayout = {
+      title: 'Bacteria Cultures Per Sample',
+      xaxis: {title: 'OTU ID'}
+    };
     // Deliverable 2: 3. Use Plotly to plot the data with the layout.
-    
+    Plotly.newPlot('bubble', bubData, bubLayout);
     // Deliverable 3: 4. Create the trace for the gauge chart.
     
     // Deliverable 3: 5. Create the layout for the gauge chart.
