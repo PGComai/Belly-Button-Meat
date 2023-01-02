@@ -130,7 +130,7 @@ function buildCharts(sample) {
       mode: 'gauge+number',
       title: {text: 'Belly Button Washes Per Week'},
       gauge: {
-        axis: {range: [null, 10], tickwidth: 1, tickcolor: 'black'},
+        axis: {range: [null, 10], tickwidth: 2, tickcolor: 'black'},
         bar: {color: 'black'},
         borderwidth: 2,
         steps: [
@@ -143,7 +143,7 @@ function buildCharts(sample) {
       }
     }];
     // Deliverable 3: 5. Create the layout for the gauge chart.
-    var gLayout = {width: 600, height: 400};
+    var gLayout = {width: 500, height: 400};
     // Deliverable 3: 6. Use Plotly to plot the gauge data and layout.
     Plotly.newPlot('gauge', gData, gLayout);
   });
