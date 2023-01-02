@@ -1,0 +1,15 @@
+body {
+    color: #000000;
+    background-color: dimgray;
+  }
+
+  .jumbotron {
+    background-image: url("../images/uoa99n1p.bmp");
+    background-size: 100% 100%;
+    text-align: center;
+    color: #f7f7f7;
+  }
+
+  .greypanel {
+    background-color: #bfbfbf;
+  }

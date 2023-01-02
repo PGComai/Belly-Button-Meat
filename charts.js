@@ -58,7 +58,6 @@ function buildMetadata(sample) {
 function buildCharts(sample) {
   // Deliverable 1: 2. Use d3.json to load the samples.json file 
   d3.json("samples.json").then((data) => {
-    console.log(data);
 
     // Deliverable 1: 3. Create a variable that holds the samples array. 
     var samples = data.samples;
@@ -80,7 +79,6 @@ function buildCharts(sample) {
 
     // Deliverable 3: 3. Create a variable that holds the washing frequency.
     var washed = selectedMeta.wfreq;
-    console.log(washed)
 
     // Deliverable 1: 7. Create the yticks for the bar chart.
     // Hint: Get the the top 10 otu_ids and map them in descending order 
@@ -88,6 +86,7 @@ function buildCharts(sample) {
     var yticks = otuIDs.slice(0, 10).map(x => 'OTU ' + String(x));
     var htext = otuLabels.slice(0,10);
 
+    var config = {responsive: true}
     // Deliverable 1: 8. Create the trace for the bar chart. 
     var barData = [{
       x: yticks,
@@ -99,12 +98,14 @@ function buildCharts(sample) {
     // Deliverable 1: 9. Create the layout for the bar chart. 
     var barLayout = {
       title: 'Top 10 Belly Button Bacteria',
-      xaxis: {title: 'Bacteria ID', ticks: yticks, },
-      yaxis: {title: 'Bacteria Amount'}
+      xaxis: {title: 'Bacteria ID', ticks: yticks, automargin: true},
+      yaxis: {title: 'Bacteria Amount'},
+      paper_bgcolor: '#bfbfbf',
+      plot_bgcolor: '#bfbfbf'
     };
 
     // Deliverable 1: 10. Use Plotly to plot the data with the layout. 
-    Plotly.newPlot("bar", barData, barLayout);
+    Plotly.newPlot("bar", barData, barLayout, config);
     // Deliverable 2: 1. Create the trace for the bubble chart.
     var bubData = [{
       x: otuIDs,
@@ -119,32 +120,38 @@ function buildCharts(sample) {
     // Deliverable 2: 2. Create the layout for the bubble chart.
     var bubLayout = {
       title: 'Bacteria Cultures Per Sample',
-      xaxis: {title: 'OTU ID'}
+      xaxis: {title: 'OTU ID'},
+      paper_bgcolor: '#bfbfbf',
+      plot_bgcolor: '#bfbfbf'
     };
     // Deliverable 2: 3. Use Plotly to plot the data with the layout.
-    Plotly.newPlot('bubble', bubData, bubLayout);
+    Plotly.newPlot('bubble', bubData, bubLayout, config);
     // Deliverable 3: 4. Create the trace for the gauge chart.
     var gData = [{
       value: washed,
       type: 'indicator',
       mode: 'gauge+number',
-      title: {text: 'Belly Button Washes Per Week'},
+      //title: {text: 'Belly Button Washes Per Week'},
       gauge: {
         axis: {range: [null, 10], tickwidth: 2, tickcolor: 'black'},
         bar: {color: 'black'},
         borderwidth: 2,
         steps: [
-          {range: [0,2], color: 'darkgreen'},
-          {range: [2,4], color: 'mediumseagreen'},
-          {range: [4,6], color: 'mediumaquamarine'},
-          {range: [6,8], color: 'darkturquoise'},
-          {range: [8,10], color: 'deepskyblue'}
+          {range: [0,2], color: 'maroon'},
+          {range: [2,4], color: 'goldenrod'},
+          {range: [4,6], color: 'yellow'},
+          {range: [6,8], color: 'greenyellow'},
+          {range: [8,10], color: 'turquoise'}
         ]
       }
     }];
     // Deliverable 3: 5. Create the layout for the gauge chart.
-    var gLayout = {width: 500, height: 400};
+    var gLayout = {
+      title: 'Belly Button Washes Per Week',
+      paper_bgcolor: '#bfbfbf',
+      plot_bgcolor: '#bfbfbf'
+    };
     // Deliverable 3: 6. Use Plotly to plot the gauge data and layout.
-    Plotly.newPlot('gauge', gData, gLayout);
+    Plotly.newPlot('gauge', gData, gLayout, config);
   });
 }
